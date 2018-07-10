@@ -11,10 +11,11 @@ func init() {
 	router := gin.Default()
 
 	logger := &Logger{}
-	handler := NewMysqlHandler()
-	defer handler.CloseConn()
 
-	userController := controllers.NewUserController(handler, logger)
+	conn := mysql.Connect()
+	defer mysql.CloseConn()
+
+	userController := controllers.NewUserController(conn, logger)
 
 	router.POST("/users", func(c *gin.Context) { userController.Create(c) })
 

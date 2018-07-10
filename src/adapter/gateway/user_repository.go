@@ -1,69 +1,64 @@
 package gateway
 
-import "github.com/nakabonne/cleanarc-sample/src/domain"
-
-type (
-	Repository struct {
-		interfaces.DBHandler
-	}
-
-	UserRepository Repository
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/nakabonne/cleanarc-sample/src/domain"
 )
 
-func (repo *UserRepository) Store(u domain.User) (id int, err error) {
-	result, err := repo.Execute(
-		"INSERT INTO users (first_name, last_name) VALUES (?,?)", u.FirstName, u.LastName,
-	)
-	if err != nil {
+type (
+	UserRepository struct {
+		Conn *gorm.DB
+	}
+
+	User struct {
+		gorm.Model
+		Name  string `gorm:"size:20;not null"`
+		Email string `gorm:"size:100;not null"`
+		Age   int    `gorm:"type:smallint"`
+	}
+)
+
+func (r *UserRepository) Store(u domain.User) (id int, err error) {
+	user := &User{
+		Name:  u.Name,
+		Email: u.Email,
+	}
+
+	if err = r.Conn.Create(user).Error; err != nil {
 		return
 	}
-	id64, err := result.LastInsertId()
-	if err != nil {
+
+	return user.ID(), nil
+}
+
+func (r *UserRepository) FindByName(name string) (us []domain.User, err error) {
+	users := []User{}
+	if err = r.Conn.Where("name = ?", name).Find(&users).Error; err != nil {
 		return
 	}
-	id = int(id64)
+
+	n := len(users)
+	us = make([]User, n)
+	for i := 0; i < n; i++ {
+		us[i].ID = users[i].ID
+		us[i].Name = users[i].Name
+		us[i].Email = users[i].Email
+	}
 	return
 }
 
-func (repo *UserRepository) FindById(identifier int) (user domain.User, err error) {
-	row, err := repo.Query("SELECT id, first_name, last_name FROM users WHERE id = ?", identifier)
-	defer row.Close()
-	if err != nil {
+func (r *UserRepository) FindAll() (d []domain.User, err error) {
+	users := []User{}
+	if err = r.Conn.Find(&users).Error; err != nil {
 		return
 	}
-	var id int
-	var firstName string
-	var lastName string
-	row.Next()
-	if err = row.Scan(&id, &firstName, &lastName); err != nil {
-		return
-	}
-	user.ID = id
-	user.FirstName = firstName
-	user.LastName = lastName
-	user.Build()
-	return
-}
 
-func (repo *UserRepository) FindAll() (users domain.Users, err error) {
-	rows, err := repo.Query("SELECT id, first_name, last_name FROM users")
-	defer rows.Close()
-	if err != nil {
-		return
-	}
-	for rows.Next() {
-		var id int
-		var firstName string
-		var lastName string
-		if err := rows.Scan(&id, &firstName, &lastName); err != nil {
-			continue
-		}
-		user := domain.User{
-			ID:        id,
-			FirstName: firstName,
-			LastName:  lastName,
-		}
-		users = append(users, *user.Build())
+	n := len(users)
+	d = make([]User, n)
+	for i := 0; i < n; i++ {
+		d[i].ID = users[i].ID
+		d[i].Name = users[i].Name
+		d[i].Email = users[i].Email
 	}
 	return
 }

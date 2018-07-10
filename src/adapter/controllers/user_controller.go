@@ -11,12 +11,13 @@ type UserController struct {
 	Interactor usecase.UserInteractor
 }
 
-func NewUserController(handler interfaces.DBHandler) *UserController {
+func NewUserController(handler interfaces.DBHandler, logger interfaces.Logger) *UserController {
 	return &UserController{
 		Interactor: usercase.UserInteractor{
 			UserRepository: &gateway.UserRepository{
 				DBHandler: handler,
 			},
+			Logger: &logger,
 		},
 	}
 }

@@ -10,7 +10,9 @@ var Router *gin.Engine
 func init() {
 	router := gin.Default()
 
+	logger := &Logger{}
 	handler := NewMysqlHandler()
 	defer handler.CloseConn()
-	userController := controllers.NewUserController(handler)
+
+	userController := controllers.NewUserController(handler, logger)
 }

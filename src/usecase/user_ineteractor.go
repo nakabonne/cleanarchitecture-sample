@@ -7,6 +7,7 @@ import (
 
 type UserInteractor struct {
 	UserRepository interfaces.UserRepository
+	Logger         Logger
 }
 
 func (i *UserInteractor) Add(u domain.User) (int, error) {

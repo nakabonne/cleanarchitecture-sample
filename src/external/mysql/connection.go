@@ -1,9 +1,7 @@
 package mysql
 
 import (
-	"database/sql"
-
-	"github.com/nakabonne/cleanarc-sample/src/adapter/interfaces"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"

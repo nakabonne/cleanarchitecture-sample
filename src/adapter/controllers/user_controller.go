@@ -18,7 +18,7 @@ func NewUserController(conn *gorm.DB, logger interfaces.Logger) *UserController 
 			UserRepository: &gateway.UserRepository{
 				Conn: conn,
 			},
-			Logger: &logger,
+			Logger: logger,
 		},
 	}
 }
@@ -28,7 +28,8 @@ func (controller *UserController) Create(c interfaces.Context) {
 	c.Bind(&u)
 	user, err := controller.Interactor.Add(u)
 	if err != nil {
-		c.JSON(500, NewError(err))
+		controller.Interactor.Logger.Log(err)
+		c.JSON(500, NewError(500, err.Error()))
 		return
 	}
 	c.JSON(201, user)

@@ -15,4 +15,8 @@ func init() {
 	defer handler.CloseConn()
 
 	userController := controllers.NewUserController(handler, logger)
+
+	router.POST("/users", func(c *gin.Context) { userController.Create(c) })
+
+	Router = router
 }

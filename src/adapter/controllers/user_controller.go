@@ -22,7 +22,7 @@ func NewUserController(handler interfaces.DBHandler, logger interfaces.Logger) *
 	}
 }
 
-func (controller *UserController) Create(c Context) {
+func (controller *UserController) Create(c interfaces.Context) {
 	u := domain.User{}
 	c.Bind(&u)
 	user, err := controller.Interactor.Add(u)

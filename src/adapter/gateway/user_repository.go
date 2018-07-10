@@ -6,6 +6,7 @@ type (
 	Repository struct {
 		interfaces.DBHandler
 	}
+
 	UserRepository Repository
 )
 

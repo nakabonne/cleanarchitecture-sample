@@ -13,13 +13,13 @@ func Connect() *gorm.DB {
 	var err error
 
 	if isDevelop() {
-		db, err = gorm.Open("mysql", os.Getenv("MYSQL_CONNECTION_DEV"))
+		db, err = gorm.Open("mysql", "root:@/hoge?charset=utf8&parseTime=True&loc=Local")
 	} else {
 		db, err = gorm.Open("mysql", os.Getenv("MYSQL_CONNECTION"))
 	}
 
 	if err != nil {
-		panic(err.Error)
+		panic(err)
 	}
 	return db
 }

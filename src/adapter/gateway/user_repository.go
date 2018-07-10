@@ -28,21 +28,21 @@ func (r *UserRepository) Store(u domain.User) (id int, err error) {
 		return
 	}
 
-	return user.ID(), nil
+	return int(user.ID), nil
 }
 
-func (r *UserRepository) FindByName(name string) (us []domain.User, err error) {
+func (r *UserRepository) FindByName(name string) (d []domain.User, err error) {
 	users := []User{}
 	if err = r.Conn.Where("name = ?", name).Find(&users).Error; err != nil {
 		return
 	}
 
 	n := len(users)
-	us = make([]User, n)
+	d = make([]domain.User, n)
 	for i := 0; i < n; i++ {
-		us[i].ID = users[i].ID
-		us[i].Name = users[i].Name
-		us[i].Email = users[i].Email
+		d[i].ID = int(users[i].ID)
+		d[i].Name = users[i].Name
+		d[i].Email = users[i].Email
 	}
 	return
 }
@@ -54,9 +54,9 @@ func (r *UserRepository) FindAll() (d []domain.User, err error) {
 	}
 
 	n := len(users)
-	d = make([]User, n)
+	d = make([]domain.User, n)
 	for i := 0; i < n; i++ {
-		d[i].ID = users[i].ID
+		d[i].ID = int(users[i].ID)
 		d[i].Name = users[i].Name
 		d[i].Email = users[i].Email
 	}

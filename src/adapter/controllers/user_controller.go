@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/jinzhu/gorm"
 	"github.com/nakabonne/cleanarc-sample/src/adapter/gateway"
 	"github.com/nakabonne/cleanarc-sample/src/adapter/interfaces"
 	"github.com/nakabonne/cleanarc-sample/src/domain"
@@ -13,7 +14,7 @@ type UserController struct {
 
 func NewUserController(conn *gorm.DB, logger interfaces.Logger) *UserController {
 	return &UserController{
-		Interactor: usercase.UserInteractor{
+		Interactor: usecase.UserInteractor{
 			UserRepository: &gateway.UserRepository{
 				Conn: conn,
 			},

@@ -14,7 +14,6 @@ func init() {
 	logger := &Logger{}
 
 	conn := mysql.Connect()
-	defer mysql.CloseConn()
 
 	userController := controllers.NewUserController(conn, logger)
 

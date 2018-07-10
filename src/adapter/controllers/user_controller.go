@@ -6,6 +6,7 @@ import (
 	"github.com/nakabonne/cleanarc-sample/src/adapter/interfaces"
 	"github.com/nakabonne/cleanarc-sample/src/domain"
 	"github.com/nakabonne/cleanarc-sample/src/usecase"
+	"github.com/pkg/errors"
 )
 
 type UserController struct {
@@ -28,7 +29,7 @@ func (controller *UserController) Create(c interfaces.Context) {
 	c.Bind(&u)
 	user, err := controller.Interactor.Add(u)
 	if err != nil {
-		controller.Interactor.Logger.Log(err)
+		controller.Interactor.Logger.Log(errors.Wrap(err, "user_controller: cannot add user"))
 		c.JSON(500, NewError(500, err.Error()))
 		return
 	}

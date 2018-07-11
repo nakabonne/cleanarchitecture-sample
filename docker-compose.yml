@@ -7,14 +7,13 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - db-data:/var/lib/mysql
-      - ./mysql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
   app:
     image: golang:1.10.3
     environment:
       MYAPP_DATABASE_HOST: db
-    command: "./bin/sample"
+    command: "./bin/cleanarchitecture-sample-linux"
     volumes:
       - .:/go/src
     working_dir: /go/src

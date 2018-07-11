@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/nakabonne/cleanarc-sample/src/external"
-	"github.com/nakabonne/cleanarc-sample/src/external/mysql"
+	"external"
+	"external/mysql"
 )
 
 func main() {

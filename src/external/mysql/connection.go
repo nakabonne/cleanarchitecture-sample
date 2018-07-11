@@ -1,9 +1,10 @@
 package mysql
 
 import (
+	"adapter/gateway"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/nakabonne/cleanarc-sample/src/adapter/gateway"
 )
 
 var db *gorm.DB

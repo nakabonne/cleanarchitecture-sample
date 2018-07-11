@@ -5,7 +5,6 @@ services:
     environment:
       MYSQL_DATABASE: hoge
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    command: "mysql -uroot -e /mysql/setup.sql"
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d

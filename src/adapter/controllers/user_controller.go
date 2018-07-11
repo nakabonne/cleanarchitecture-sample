@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"adapter/gateway"
+	"adapter/interfaces"
+	"domain"
+	"usecase"
+
 	"github.com/jinzhu/gorm"
-	"github.com/nakabonne/cleanarc-sample/src/adapter/gateway"
-	"github.com/nakabonne/cleanarc-sample/src/adapter/interfaces"
-	"github.com/nakabonne/cleanarc-sample/src/domain"
-	"github.com/nakabonne/cleanarc-sample/src/usecase"
 	"github.com/pkg/errors"
 )
 

@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"github.com/nakabonne/cleanarc-sample/src/domain"
-	"github.com/nakabonne/cleanarc-sample/src/usecase/interfaces"
+	"domain"
+	"usecase/interfaces"
 )
 
 type UserInteractor struct {

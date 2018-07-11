@@ -1,9 +1,10 @@
 package external
 
 import (
+	"adapter/controllers"
+	"external/mysql"
+
 	"github.com/gin-gonic/gin"
-	"github.com/nakabonne/cleanarc-sample/src/adapter/controllers"
-	"github.com/nakabonne/cleanarc-sample/src/external/mysql"
 )
 
 var Router *gin.Engine

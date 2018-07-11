@@ -1,8 +1,9 @@
 package gateway
 
 import (
+	"domain"
+
 	"github.com/jinzhu/gorm"
-	"github.com/nakabonne/cleanarc-sample/src/domain"
 )
 
 type (

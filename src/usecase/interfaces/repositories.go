@@ -1,6 +1,6 @@
 package interfaces
 
-import "github.com/nakabonne/cleanarc-sample/src/domain"
+import "domain"
 
 type UserRepository interface {
 	Store(domain.User) (int, error)

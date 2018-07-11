@@ -1,5 +1,7 @@
 # cleanarchitecture-sample
 
+Sample go-api using the clean architecture based on [hirotakan/go-cleanarchitecture-sample](https://github.com/hirotakan/go-cleanarchitecture-sample)
+
 ## Getting Started
 
 ### Installation

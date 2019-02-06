@@ -26,13 +26,25 @@ func NewUserController(conn *gorm.DB, logger interfaces.Logger) *UserController 
 }
 
 func (controller *UserController) Create(c interfaces.Context) {
-	u := domain.User{}
-	c.Bind(&u)
-	user, err := controller.Interactor.Add(u)
+	type (
+		Request struct {
+			Name  string `json:"name"`
+			Email string `json:"email"`
+		}
+		Response struct {
+			UserID int `json:"user_id"`
+		}
+	)
+	req := Request{}
+	c.Bind(&req)
+	user := domain.User{Name: req.Name, Email: req.Email}
+
+	id, err := controller.Interactor.Add(user)
 	if err != nil {
 		controller.Interactor.Logger.Log(errors.Wrap(err, "user_controller: cannot add user"))
 		c.JSON(500, NewError(500, err.Error()))
 		return
 	}
-	c.JSON(201, user)
+	res := Response{UserID: id}
+	c.JSON(201, res)
 }

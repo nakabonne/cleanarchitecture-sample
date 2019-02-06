@@ -13,12 +13,14 @@ services:
     image: golang:1.10.3
     environment:
       MYAPP_DATABASE_HOST: db
-    command: "./bin/cleanarchitecture-sample-linux"
+    command: "./src/cleanarchitecture-sample/cleanarchitecture-sample"
     volumes:
       - .:/go/src
     working_dir: /go/src
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     links:
       - db
 

@@ -12,9 +12,13 @@ $ git clone https://github.com/nakabonne/cleanarchitecture-sample.git
 
 ### Running with docker
 
-```
+Required: Docker 17.05
+
+```sh
 $ docker-compose up -d
 ```
+
+it will listen on port 8080.
 
 ## Tools required for development
 

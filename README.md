@@ -13,13 +13,11 @@ $ git clone https://github.com/nakabonne/cleanarchitecture-sample.git
 ### Running with docker
 
 ```
-$ make run
+$ docker-compose up -d
 ```
 
-## How to edit
+## Tools required for development
 
-### Requires
-
-- [Go1.10.3+](https://golang.org/dl/)
+- [Go1.11.0+](https://golang.org/dl/)
 - [direnv](https://github.com/direnv/direnv)
-- [gb](github.com/constabulary/gb)
+- [gb](https://github.com/constabulary/gb)

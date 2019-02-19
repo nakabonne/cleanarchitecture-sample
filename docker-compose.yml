@@ -10,13 +10,9 @@ services:
     ports:
       - "3306:3306"
   app:
-    image: golang:1.10.3
+    build: .
     environment:
       MYAPP_DATABASE_HOST: db
-    command: "./src/cleanarchitecture-sample/cleanarchitecture-sample"
-    volumes:
-      - .:/go/src
-    working_dir: /go/src
     ports:
       - "8080:8080"
     depends_on:

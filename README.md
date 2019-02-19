@@ -1,6 +1,6 @@
 # cleanarchitecture-sample
 
-Sample go-api demonstrating the clean architecture based on [hirotakan/go-cleanarchitecture-sample](https://github.com/hirotakan/go-cleanarchitecture-sample)
+Sample REST API demonstrating the clean architecture written in golang based on [hirotakan/go-cleanarchitecture-sample](https://github.com/hirotakan/go-cleanarchitecture-sample)
 .
 ## Getting Started
 

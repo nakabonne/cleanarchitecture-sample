@@ -23,9 +23,3 @@ $ docker-compose up -d
 $ curl http://localhost:8080/hc
 hello
 ```
-
-## Tools required for development
-
-- [Go1.11.0+](https://golang.org/dl/)
-- [direnv](https://github.com/direnv/direnv)
-- [gb](https://github.com/constabulary/gb)
